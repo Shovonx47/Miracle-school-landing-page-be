@@ -5,9 +5,6 @@ const connectDB = require('./config/db');
 
 const app = express();
 
-// Load env vars and connect to the database
-connectDB();
-
 // Middleware
 app.use(cors({
   origin: ['http://localhost:3000', 'https://school-website-full-stack.vercel.app'],
@@ -16,10 +13,21 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Connect to MongoDB before handling routes
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    res.status(500).json({ error: 'Database connection failed' });
+  }
+});
+
 // Routes
 app.use('/api/mission-vision', require('./routes/missionVisionRoutes'));
 app.use('/api/faculty', require('./routes/facultyRoutes'));
-app.use('/api/location', require('./routes/locationRoutes')); // New route added
+app.use('/api/location', require('./routes/locationRoutes'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -32,8 +40,18 @@ app.use((err, req, res, next) => {
   });
 });
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Only listen if not running in Vercel
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
