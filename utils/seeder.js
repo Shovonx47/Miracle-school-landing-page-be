@@ -1,6 +1,5 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const connectDB = require('../config/db');
 const Faculty = require('../models/Faculty');
 const MissionVision = require('../models/MissionVision');
 const Location = require('../models/Location');
@@ -20,22 +19,14 @@ const locationData = [
   }
 ];
 
-// Connect to database
-connectDB();
-
 // Utility function to import data
 const importData = async (Model, data, modelName) => {
   try {
-    // Clear existing data
     await Model.deleteMany();
-
-    // Insert new data
-    await Model.insertMany(data);
-
-    console.log(`${modelName} Data imported successfully`);
-    process.exit();
+    await Model.create(data);
+    console.log(`${modelName} data imported successfully`);
   } catch (error) {
-    console.error(`Error importing ${modelName} data: ${error.message}`);
+    console.error(`Error importing ${modelName} data:`, error.message);
     process.exit(1);
   }
 };
@@ -44,38 +35,60 @@ const importData = async (Model, data, modelName) => {
 const destroyData = async (Model, modelName) => {
   try {
     await Model.deleteMany();
-
-    console.log(`${modelName} Data destroyed successfully`);
-    process.exit();
+    console.log(`${modelName} data destroyed successfully`);
   } catch (error) {
-    console.error(`Error destroying ${modelName} data: ${error.message}`);
+    console.error(`Error destroying ${modelName} data:`, error.message);
     process.exit(1);
   }
 };
 
-// Determine which action to perform
-const action = process.argv[2];
-const modelName = process.argv[3]; // Pass "Faculty", "MissionVision", or "Location" as the third argument
+const runSeeder = async () => {
+  try {
+    // Connect to MongoDB
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log('MongoDB Connected...');
 
-if (!modelName || (modelName !== 'Faculty' && modelName !== 'MissionVision' && modelName !== 'Location')) {
-  console.error('Please specify a valid model: Faculty, MissionVision, or Location');
-  process.exit(1);
-}
+    const action = process.argv[2];
+    const modelName = process.argv[3];
 
-const Model = modelName === 'Faculty' 
-  ? Faculty 
-  : modelName === 'MissionVision' 
-    ? MissionVision 
-    : Location;
+    if (!action || !modelName) {
+      console.error('Please provide both action and model name');
+      process.exit(1);
+    }
 
-const data = modelName === 'Faculty' 
-  ? facultyData 
-  : modelName === 'MissionVision' 
-    ? missionVisionData 
-    : locationData;
+    let Model, data;
+    switch (modelName.toLowerCase()) {
+      case 'faculty':
+        Model = Faculty;
+        data = facultyData;
+        break;
+      case 'missionvision':
+        Model = MissionVision;
+        data = missionVisionData;
+        break;
+      case 'location':
+        Model = Location;
+        data = locationData;
+        break;
+      default:
+        console.error('Invalid model name');
+        process.exit(1);
+    }
 
-if (action === '-d') {
-  destroyData(Model, modelName);
-} else {
-  importData(Model, data, modelName);
-}
+    if (action === 'import') {
+      await importData(Model, data, modelName);
+    } else if (action === 'destroy') {
+      await destroyData(Model, modelName);
+    } else {
+      console.error('Invalid action. Use "import" or "destroy"');
+      process.exit(1);
+    }
+
+    process.exit(0);
+  } catch (error) {
+    console.error('Error:', error.message);
+    process.exit(1);
+  }
+};
+
+runSeeder();
