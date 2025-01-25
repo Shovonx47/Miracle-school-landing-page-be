@@ -7,7 +7,9 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://miracle-school-landing-page-be.vercel.app/'],
+  origin: ['http://localhost:3000', 'https://miracle-school-landing-page-be.vercel.app/', 'https://miracle-school-website-fe.vercel.app', 'https://miracle-school-website-fe.vercel.app'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
 app.use(express.json());
