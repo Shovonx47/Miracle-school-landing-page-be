@@ -19,8 +19,15 @@ app.use(async (req, res, next) => {
     await connectDB();
     next();
   } catch (error) {
-    console.error('MongoDB connection error:', error);
-    res.status(500).json({ error: 'Database connection failed' });
+    console.error('Database Connection Error:', {
+      path: req.path,
+      method: req.method,
+      error: error.message
+    });
+    res.status(500).json({ 
+      error: 'Database connection failed',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
   }
 });
 
@@ -31,12 +38,17 @@ app.use('/api/location', require('./routes/locationRoutes'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {
+  console.error('Server Error:', {
+    path: req.path,
+    method: req.method,
+    error: err.message
+  });
+  
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-  res.status(statusCode);
-  res.json({
+  res.status(statusCode).json({
     success: false,
     message: err.message,
-    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
   });
 });
 
