@@ -6,6 +6,7 @@ const Location = require('../models/Location');
 const GoverningBody = require('../models/governingBodyModel');
 const TimelineEvent = require('../models/timelineEventModel');
 const AlbumImage = require('../models/albumImageModel');
+const Contact = require('../models/contactModel'); // Assuming you have a contact model
 const facultyData = require('../data/seedData');
 const missionVisionData = require('../data/missionVisionData');
 const locationData = [
@@ -25,6 +26,7 @@ const locationData = [
 const seedTimelineEvents = require('../data/timelineEventsSeeder');
 const seedGoverningBodyMembers = require('../data/governingBodySeeder');
 const seedAlbumImages = require('../data/albumImagesSeeder');
+const seedContactData = require('../data/contactSeeder');
 
 // Utility function to import data
 const importData = async (Model, data, modelName) => {
@@ -59,6 +61,7 @@ const runSeeders = async () => {
     await seedTimelineEvents();
     await seedGoverningBodyMembers();
     await seedAlbumImages();
+    await seedContactData(); // Call the seed function
     console.log('All seeders executed successfully!');
   } catch (error) {
     console.error('Error running seeders:', error.message);
@@ -116,6 +119,10 @@ const runSeeder = async () => {
       case 'albumimage':
         Model = AlbumImage;
         data = seedAlbumImages;
+        break;
+      case 'contact':
+        Model = Contact;
+        data = seedContactData;
         break;
       default:
         console.error('Invalid model name');
