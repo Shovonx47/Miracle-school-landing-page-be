@@ -2,12 +2,19 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
+const aboutUsRoutes = require('./routes/aboutUsRoutes');
+const historyRoutes = require('./routes/historyRoutes');
 
 const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'https://miracle-school-landing-page-be.vercel.app/', 'https://miracle-school-website-fe.vercel.app', 'https://miracle-school-website-fe.vercel.app'],
+  origin: [
+    'http://localhost:3000',
+    'https://miracle-school-landing-page-be.vercel.app/',
+    'https://miracle-school-website-fe.vercel.app',
+    'https://miracle-school-website-fe.vercel.app'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -23,9 +30,9 @@ const withDB = async (req, res, next) => {
     return next();
   } catch (error) {
     console.error(`MongoDB connection error: ${error.message}`);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Database connection failed',
-      message: error.message 
+      message: error.message
     });
   }
 };
@@ -37,6 +44,10 @@ app.use(withDB);
 app.use('/api/mission-vision', require('./routes/missionVisionRoutes'));
 app.use('/api/faculty', require('./routes/facultyRoutes'));
 app.use('/api/location', require('./routes/locationRoutes'));
+
+// Integrated routes for About Us and History
+app.use('/api/about-us', aboutUsRoutes);
+app.use('/api/history', historyRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -59,6 +70,7 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Not Found' });
 });
 
+// Start the server
 if (process.env.NODE_ENV !== 'production') {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {

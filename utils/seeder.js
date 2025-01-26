@@ -3,27 +3,38 @@ const mongoose = require('mongoose');
 const Faculty = require('../models/Faculty');
 const MissionVision = require('../models/MissionVision');
 const Location = require('../models/Location');
+const GoverningBody = require('../models/governingBodyModel');
+const TimelineEvent = require('../models/timelineEventModel');
+const AlbumImage = require('../models/albumImageModel');
 const facultyData = require('../data/seedData');
 const missionVisionData = require('../data/missionVisionData');
-
 const locationData = [
   {
     name: "Notre Dame College",
     coordinates: {
       lat: 23.738636,
-      lng: 90.395491
+      lng: 90.395491,
     },
     address: "2 Arambagh, Motijheel, Dhaka 1000, Bangladesh",
     phone: "+880 2-7192027",
-    email: "info@notredamecollege-dhaka.com"
-  }
+    email: "info@notredamecollege-dhaka.com",
+  },
 ];
+
+// Import external seeders
+const seedTimelineEvents = require('../data/timelineEventsSeeder');
+const seedGoverningBodyMembers = require('../data/governingBodySeeder');
+const seedAlbumImages = require('../data/albumImagesSeeder');
 
 // Utility function to import data
 const importData = async (Model, data, modelName) => {
   try {
-    await Model.deleteMany();
-    await Model.create(data);
+    await Model.deleteMany({});
+    if (Array.isArray(data)) {
+      await Model.insertMany(data);
+    } else if (typeof data === 'function') {
+      await data(); // Execute seeder function
+    }
     console.log(`${modelName} data imported successfully`);
   } catch (error) {
     console.error(`Error importing ${modelName} data:`, error.message);
@@ -34,7 +45,7 @@ const importData = async (Model, data, modelName) => {
 // Utility function to destroy data
 const destroyData = async (Model, modelName) => {
   try {
-    await Model.deleteMany();
+    await Model.deleteMany({});
     console.log(`${modelName} data destroyed successfully`);
   } catch (error) {
     console.error(`Error destroying ${modelName} data:`, error.message);
@@ -42,6 +53,20 @@ const destroyData = async (Model, modelName) => {
   }
 };
 
+// Run all seeders
+const runSeeders = async () => {
+  try {
+    await seedTimelineEvents();
+    await seedGoverningBodyMembers();
+    await seedAlbumImages();
+    console.log('All seeders executed successfully!');
+  } catch (error) {
+    console.error('Error running seeders:', error.message);
+    process.exit(1);
+  }
+};
+
+// Main function to handle all actions
 const runSeeder = async () => {
   try {
     // Connect to MongoDB
@@ -49,15 +74,25 @@ const runSeeder = async () => {
     console.log('MongoDB Connected...');
 
     const action = process.argv[2];
-    const modelName = process.argv[3];
+    const modelName = process.argv[3]?.toLowerCase();
 
-    if (!action || !modelName) {
-      console.error('Please provide both action and model name');
+    if (!action) {
+      console.error('Please provide an action: import, destroy, or run-seeders');
+      process.exit(1);
+    }
+
+    if (action === 'run-seeders') {
+      await runSeeders();
+      process.exit(0);
+    }
+
+    if (!modelName) {
+      console.error('Please provide a model name for import or destroy actions');
       process.exit(1);
     }
 
     let Model, data;
-    switch (modelName.toLowerCase()) {
+    switch (modelName) {
       case 'faculty':
         Model = Faculty;
         data = facultyData;
@@ -70,6 +105,18 @@ const runSeeder = async () => {
         Model = Location;
         data = locationData;
         break;
+      case 'governingbody':
+        Model = GoverningBody;
+        data = seedGoverningBodyMembers;
+        break;
+      case 'timelineevent':
+        Model = TimelineEvent;
+        data = require('../data/timelineEventsSeeder');
+        break;
+      case 'albumimage':
+        Model = AlbumImage;
+        data = seedAlbumImages;
+        break;
       default:
         console.error('Invalid model name');
         process.exit(1);
@@ -80,7 +127,7 @@ const runSeeder = async () => {
     } else if (action === 'destroy') {
       await destroyData(Model, modelName);
     } else {
-      console.error('Invalid action. Use "import" or "destroy"');
+      console.error('Invalid action. Use "import", "destroy", or "run-seeders"');
       process.exit(1);
     }
 
