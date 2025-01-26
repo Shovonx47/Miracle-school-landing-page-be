@@ -1,0 +1,29 @@
+[
+    {
+        "id": "annual-sports-day-2024",
+        "date": "March 15, 2024",
+        "title": "Annual Sports Day",
+        "description": "Join us for our annual sports day celebration featuring various competitions.",
+        "image": "/assets/images/banners/pexels-goumbik-296301.jpg",
+        "category": "Sports",
+        "content": "<p>We are excited to announce our upcoming Annual Sports Day, a celebration of athletic excellence and school spirit. This year's event promises to be bigger and better than ever before.</p><h2>Event Details</h2><p>Date: March 15, 2024<br/>Time: 8:00 AM - 4:00 PM<br/>Venue: School Main Ground</p><h2>Featured Events</h2><ul><li>100m Sprint</li><li>Long Jump</li><li>Relay Race</li><li>Basketball Tournament</li><li>Football Match</li></ul><h2>Schedule</h2><p>8:00 AM - Opening Ceremony<br/>9:00 AM - Track Events Begin<br/>12:00 PM - Lunch Break<br/>1:00 PM - Field Events<br/>3:30 PM - Prize Distribution</p><h2>Special Arrangements</h2><p>We have arranged for refreshments and seating for all parents and guardians. Medical staff will be present throughout the event to ensure safety.</p>"
+    },
+    {
+        "id": "science-fair-2024",
+        "date": "March 20, 2024",
+        "title": "Science Fair 2024",
+        "description": "Students showcase their innovative science projects.",
+        "image": "/assets/images/banners/pexels-rdne-7606209.jpg",
+        "category": "Academic",
+        "content": "<p>Get ready for an exciting showcase of scientific innovation at our annual Science Fair 2024!</p><h2>Event Details</h2><p>Date: March 20, 2024<br/>Time: 9:00 AM - 3:00 PM<br/>Venue: School Auditorium</p><h2>Categories</h2><ul><li>Physical Sciences</li><li>Life Sciences</li><li>Environmental Science</li><li>Technology & Engineering</li><li>Mathematics</li></ul><h2>Judging Criteria</h2><p>Projects will be evaluated based on:<br/>- Scientific Method<br/>- Creativity & Innovation<br/>- Presentation Skills<br/>- Documentation</p>"
+    },
+    {
+        "id": "cultural-program-2024",
+        "date": "March 25, 2024",
+        "title": "Cultural Program",
+        "description": "Celebrating our rich cultural heritage through performances.",
+        "image": "/assets/images/banners/pexels-su-casa-panama-56317556-9650298.jpg",
+        "category": "Culture",
+        "content": "<p>Join us for a spectacular evening celebrating the diverse cultural heritage of our school community!</p><h2>Event Details</h2><p>Date: March 25, 2024<br/>Time: 5:00 PM - 8:00 PM<br/>Venue: School Auditorium</p><h2>Program Highlights</h2><ul><li>Traditional Dance Performances</li><li>Musical Presentations</li><li>Drama Performances</li><li>Poetry Recitations</li><li>Cultural Fashion Show</li></ul><h2>Special Features</h2><p>- Cultural Food Court<br/>- Art Exhibition<br/>- Traditional Games Corner<br/>- Photo Booth</p>"
+    }
+]
