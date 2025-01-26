@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const aboutUsController = require('../controllers/aboutUsController');
 
+// Combined route for administration page
+router.get('/administration', aboutUsController.getAdministrationData);
+
 // Governing Body routes
 router.post('/governing-body', aboutUsController.createGoverningBodyMember);
 router.get('/governing-body', aboutUsController.getGoverningBodyMembers);

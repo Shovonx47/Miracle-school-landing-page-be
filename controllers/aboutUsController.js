@@ -23,6 +23,23 @@ exports.deleteGoverningBodyMember = async (req, res) => {
   res.status(204).send();
 };
 
+// Combined endpoint for administration page
+exports.getAdministrationData = async (req, res) => {
+  try {
+    const [governingBody, albumImages] = await Promise.all([
+      GoverningBody.find(),
+      AlbumImage.find()
+    ]);
+    
+    res.status(200).json({
+      governingBody,
+      albumImages
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // CRUD operations for Album Images
 exports.createAlbumImage = async (req, res) => {
   const image = new AlbumImage(req.body);
