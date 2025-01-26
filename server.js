@@ -44,6 +44,7 @@ app.use(withDB);
 app.use('/api/mission-vision', require('./routes/missionVisionRoutes'));
 app.use('/api/faculty', require('./routes/facultyRoutes'));
 app.use('/api/location', require('./routes/locationRoutes'));
+app.use('/api/contact', require('./routes/contact'));
 
 // Integrated routes for About Us and History
 app.use('/api/about-us', aboutUsRoutes);
