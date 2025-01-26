@@ -3,7 +3,7 @@ const router = express.Router();
 const News = require('../models/news');
 
 // Get all news
-router.get('/api/news', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const news = await News.find();
         res.status(200).json({
@@ -20,7 +20,7 @@ router.get('/api/news', async (req, res) => {
 });
 
 // Get single news by ID
-router.get('/api/news/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
         const news = await News.findOne({ id: req.params.id });
         
