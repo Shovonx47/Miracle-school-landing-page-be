@@ -41,37 +41,21 @@ const seedNewsData = async () => {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('MongoDB Connected...');
 
-    // Delete existing news data
+    // Delete all existing news data (including notices)
     await News.deleteMany();
-    console.log('Existing news data deleted');
+    console.log('All existing news data deleted');
 
-    // Insert new news data
+    // First insert news data
     await News.insertMany(newsData);
     console.log('News data seeded successfully');
+
+    // Then insert notices data
+    await News.insertMany(noticesData);
+    console.log('Notices data seeded successfully');
+    
     process.exit();
   } catch (error) {
     console.error('Error seeding news data:', error);
-    process.exit(1);
-  }
-};
-
-// Function to seed notices data
-const seedNoticesData = async () => {
-  try {
-    // Connect to MongoDB
-    await mongoose.connect(process.env.MONGODB_URI);
-    console.log('MongoDB Connected...');
-
-    // Delete existing notices data
-    await News.deleteMany({ category: 'Notice' });
-    console.log('Existing notices data deleted');
-
-    // Insert new notices data
-    await News.insertMany(noticesData);
-    console.log('Notices data seeded successfully');
-    process.exit();
-  } catch (error) {
-    console.error('Error seeding notices data:', error);
     process.exit(1);
   }
 };
@@ -87,14 +71,11 @@ if (command === 'import') {
     case 'news':
       seedNewsData();
       break;
-    case 'notices':
-      seedNoticesData();
-      break;
     default:
-      console.error('Please use: node utils/seeder.js import [administration|news|notices]');
+      console.error('Please use: node utils/seeder.js import [administration|news]');
       process.exit(1);
   }
 } else {
-  console.error('Please use: node utils/seeder.js import [administration|news|notices]');
+  console.error('Please use: node utils/seeder.js import [administration|news]');
   process.exit(1);
 }

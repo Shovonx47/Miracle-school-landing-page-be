@@ -6,7 +6,15 @@ const News = require('../models/news');
 router.get('/', async (req, res) => {
     try {
         const { category } = req.query;
-        const query = category ? { category } : {};
+        let query = {};
+        
+        if (category) {
+            // If category is specified, filter by that category
+            query.category = category;
+        } else {
+            // If no category is specified, exclude notices
+            query.category = { $ne: 'Notice' };
+        }
         
         const news = await News.find(query);
         res.status(200).json({
