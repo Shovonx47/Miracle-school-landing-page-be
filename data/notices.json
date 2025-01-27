@@ -7,7 +7,7 @@
         "image": "/assets/images/notices/notice-default.jpg",
         "category": "Notice",
         "content": "<p>নোটর ডেম কলেজের ৭৫ বছর পূর্তি উৎসবের সমাপনী অনুষ্ঠানের বিস্তারিত কর্মসূচি এখানে দেখুন।</p>",
-        "pdfUrl": "/pdfs/notice1.pdf"
+        "pdfUrl": "/assets/files/Profile-AP5-06.12.24-new-address.pdf"
     },
     {
         "id": "hsc-2024-results",
@@ -17,7 +17,7 @@
         "image": "/assets/images/notices/notice-default.jpg",
         "category": "Notice",
         "content": "<p>এইচএসসি ২০২৪ বোর্ড পরীক্ষায় উত্তীর্ণ শিক্ষার্থীদের সম্পূর্ণ তালিকা দেখতে পিডিএফ ফাইলটি ডাউনলোড করুন।</p>",
-        "pdfUrl": "/pdfs/notice2.pdf"
+        "pdfUrl": "/assets/files/Profile-AP5-06.12.24-new-address.pdf"
     },
     {
         "id": "75th-anniversary-registration",
@@ -27,7 +27,7 @@
         "image": "/assets/images/notices/notice-default.jpg",
         "category": "Notice",
         "content": "<p>৭৫ বছর পূর্তি উৎসবের সমাপনী অনুষ্ঠানে অংশগ্রহণের জন্য রেজিস্ট্রেশন প্রক্রিয়ার বিস্তারিত তথ্য।</p>",
-        "pdfUrl": "/pdfs/notice3.pdf"
+        "pdfUrl": "/assets/files/Profile-AP5-06.12.24-new-address.pdf"
     },
     {
         "id": "admission-2025",
@@ -37,7 +37,7 @@
         "image": "/assets/images/notices/notice-default.jpg",
         "category": "Notice",
         "content": "<p>২০২৫ শিক্ষাবর্ষের ভর্তি প্রক্রিয়ার বিস্তারিত তথ্য এবং আবেদন প্রক্রিয়া সম্পর্কিত গুরুত্বপূর্ণ তথ্য।</p>",
-        "pdfUrl": "/pdfs/notice4.pdf"
+        "pdfUrl": "/assets/files/Profile-AP5-06.12.24-new-address.pdf"
     },
     {
         "id": "exam-schedule-2024",
@@ -47,6 +47,6 @@
         "image": "/assets/images/notices/notice-default.jpg",
         "category": "Notice",
         "content": "<p>২০২৪ সালের বার্ষিক পরীক্ষার বিস্তারিত সময়সূচি এবং পরীক্ষা সংক্রান্ত গুরুত্বপূর্ণ নির্দেশাবলী।</p>",
-        "pdfUrl": "/pdfs/notice5.pdf"
+        "pdfUrl": "/assets/files/Profile-AP5-06.12.24-new-address.pdf"
     }
 ]
