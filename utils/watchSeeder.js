@@ -6,31 +6,40 @@ const colors = require('colors');
 // Initialize watcher
 const watcher = chokidar.watch(path.join(__dirname, '../data'), {
     ignored: /(^|[\/\\])\../, // ignore dotfiles
-    persistent: true
+    persistent: true,
+    ignoreInitial: true,
+    awaitWriteFinish: {
+        stabilityThreshold: 1000,
+        pollInterval: 100
+    }
 });
 
 // Function to run seeder
 const runSeeder = (type) => {
-    console.log(colors.yellow(`Changes detected! Running ${type} seeder...`));
-    
-    const seeder = spawn('node', ['utils/seeder.js', 'import', type], {
-        cwd: path.join(__dirname, '..')
-    });
+    return new Promise((resolve) => {
+        console.log(colors.yellow(`Changes detected! Running ${type} seeder...`));
+        
+        const seeder = spawn('node', ['utils/seeder.js', 'import', type], {
+            cwd: path.join(__dirname, '..')
+        });
 
-    seeder.stdout.on('data', (data) => {
-        console.log(colors.green(data.toString()));
-    });
+        seeder.stdout.on('data', (data) => {
+            console.log(colors.green(data.toString()));
+        });
 
-    seeder.stderr.on('data', (data) => {
-        console.error(colors.red(data.toString()));
-    });
+        seeder.stderr.on('data', (data) => {
+            console.error(colors.red(data.toString()));
+        });
 
-    seeder.on('close', (code) => {
-        if (code === 0) {
-            console.log(colors.green(`✓ ${type} data updated successfully!`));
-        } else {
-            console.error(colors.red(`✗ Error updating ${type} data`));
-        }
+        seeder.on('close', (code) => {
+            if (code === 0) {
+                console.log(colors.green(`✓ ${type} data updated successfully!`));
+                resolve(true);
+            } else {
+                console.error(colors.red(`✗ Error updating ${type} data`));
+                resolve(false);
+            }
+        });
     });
 };
 
@@ -42,14 +51,20 @@ const fileToSeederMap = {
     'events.json': 'news'
 };
 
+let isProcessing = false;
+
 // Watch for changes
 watcher
-    .on('change', (filePath) => {
+    .on('change', async (filePath) => {
+        if (isProcessing) return;
+        
         const fileName = path.basename(filePath);
         const seederType = fileToSeederMap[fileName];
         
         if (seederType) {
-            runSeeder(seederType);
+            isProcessing = true;
+            await runSeeder(seederType);
+            isProcessing = false;
         }
     })
     .on('ready', () => {

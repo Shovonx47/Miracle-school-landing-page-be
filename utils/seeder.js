@@ -27,10 +27,16 @@ const seedAdministrationData = async () => {
     ]);
 
     console.log('Administration data seeded successfully');
-    process.exit();
+    
+    // Close the connection instead of exiting
+    await mongoose.connection.close();
+    return true;
   } catch (error) {
     console.error('Error seeding administration data:', error);
-    process.exit(1);
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.close();
+    }
+    return false;
   }
 };
 
@@ -53,10 +59,15 @@ const seedNewsData = async () => {
     await News.insertMany(noticesData);
     console.log('Notices data seeded successfully');
     
-    process.exit();
+    // Close the connection instead of exiting
+    await mongoose.connection.close();
+    return true;
   } catch (error) {
     console.error('Error seeding news data:', error);
-    process.exit(1);
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.close();
+    }
+    return false;
   }
 };
 
@@ -66,10 +77,14 @@ const [,, command, modelName] = process.argv;
 if (command === 'import') {
   switch (modelName) {
     case 'administration':
-      seedAdministrationData();
+      seedAdministrationData().then(success => {
+        process.exit(success ? 0 : 1);
+      });
       break;
     case 'news':
-      seedNewsData();
+      seedNewsData().then(success => {
+        process.exit(success ? 0 : 1);
+      });
       break;
     default:
       console.error('Please use: node utils/seeder.js import [administration|news]');
