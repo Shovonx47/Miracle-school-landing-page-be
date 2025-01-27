@@ -1,33 +1,33 @@
 const administrationData = {
   governingBody: [
     {
-      name: "Dr. John Smith",
-      position: "Chairman",
-      image: "/assets/images/poeple/high-angle-buisness-man.jpg",
-      description: "Dr. Smith has over 25 years of experience in education administration and leadership."
+      name: 'Brigadier General Md Shahadat Sikder, ndc, afwc, psc',
+      position: 'Chairman',
+      description: 'Governing Body, Birshreshtha Noor Mohammad Public College & Additional Director General Headquarters Border Guard Bangladesh',
+      image: '/assets/images/poeple/inspiring-new-boss.jpg'
     },
     {
-      name: "Mrs. Sarah Johnson",
-      position: "Vice Chairman",
-      image: "/assets/images/poeple/man-portrait-posing-loft-modern-space.jpg",
-      description: "Mrs. Johnson brings 20 years of expertise in curriculum development and educational policy."
-    },
-    {
-      name: "Prof. David Chen",
-      position: "Secretary",
-      image: "/assets/images/poeple/office-happy-man-work.jpg",
-      description: "Prof. Chen is an expert in educational technology and modern teaching methodologies."
+      name: 'Sharif Ahmed Chowdhury',
+      position: 'Member, Teacher Representative',
+      description: 'Governing Body, Birshreshtha Noor Mohammad Public College Peelkhana, Dhaka.',
+      image: '/assets/images/poeple/office-happy-man-work.jpg'
     },
     {
       name: "Dr. Emily Brown",
       position: "Treasurer",
       image: "/assets/images/poeple/office-happy-man-work.jpg",
       description: "Dr. Brown has extensive experience in educational finance and resource management."
+    },
+    {
+      name: "Prof. David Chen",
+      position: "Secretary",
+      image: "/assets/images/poeple/office-happy-man-work.jpg",
+      description: "Prof. Chen is an expert in educational technology and modern teaching methodologies."
     }
   ],
   albumImages: [
     {
-      url: "/assets/images/facilities/pexels-kobeboy-1516440.jpg "
+      url: "/assets/images/facilities/pexels-kobeboy-1516440.jpg"
     },
     {
       url: "/assets/images/facilities/pexels-mary-taylor-5896836.jpg"
