@@ -15,11 +15,11 @@ const watcher = chokidar.watch(path.join(__dirname, '../data'), {
 });
 
 // Function to run seeder
-const runSeeder = (type) => {
+const runSeeder = (fileName) => {
     return new Promise((resolve) => {
-        console.log(colors.yellow(`Changes detected! Running ${type} seeder...`));
+        console.log(colors.yellow(`Changes detected in ${fileName}! Running seeder...`));
         
-        const seeder = spawn('node', ['utils/seeder.js', 'import', type], {
+        const seeder = spawn('node', ['utils/seeder.js', 'import', fileName], {
             cwd: path.join(__dirname, '..')
         });
 
@@ -33,22 +33,14 @@ const runSeeder = (type) => {
 
         seeder.on('close', (code) => {
             if (code === 0) {
-                console.log(colors.green(`✓ ${type} data updated successfully!`));
+                console.log(colors.green(`✓ ${fileName} data updated successfully!`));
                 resolve(true);
             } else {
-                console.error(colors.red(`✗ Error updating ${type} data`));
+                console.error(colors.red(`✗ Error updating ${fileName} data`));
                 resolve(false);
             }
         });
     });
-};
-
-// Map files to their seeder types
-const fileToSeederMap = {
-    'administrationSeeder.js': 'administration',
-    'news.json': 'news',
-    'notices.json': 'news',
-    'events.json': 'news'
 };
 
 let isProcessing = false;
@@ -59,18 +51,23 @@ watcher
         if (isProcessing) return;
         
         const fileName = path.basename(filePath);
-        const seederType = fileToSeederMap[fileName];
         
-        if (seederType) {
+        // Only process .json files and files ending with Seeder.js
+        if (fileName.endsWith('.json') || fileName.endsWith('Seeder.js')) {
             isProcessing = true;
-            await runSeeder(seederType);
+            await runSeeder(fileName);
             isProcessing = false;
+        }
+    })
+    .on('add', async (filePath) => {
+        const fileName = path.basename(filePath);
+        if (fileName.endsWith('.json') || fileName.endsWith('Seeder.js')) {
+            console.log(colors.cyan(`New seeder file detected: ${fileName}`));
         }
     })
     .on('ready', () => {
         console.log(colors.cyan('👀 Watching for changes in data files...'));
-        console.log(colors.cyan('The following files are being monitored:'));
-        Object.keys(fileToSeederMap).forEach(file => {
-            console.log(colors.cyan(`  - ${file}`));
-        });
+        console.log(colors.cyan('The following file types are being monitored:'));
+        console.log(colors.cyan('  - *.json'));
+        console.log(colors.cyan('  - *Seeder.js'));
     });
