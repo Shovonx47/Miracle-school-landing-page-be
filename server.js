@@ -18,7 +18,8 @@ app.use(cors({
   origin: [
     'http://localhost:3000',
     'https://miracle-school-landing-page.vercel.app',
-    'https://miracle-school-landing-page-git-main-shovonx47.vercel.app'
+    'https://miracle-school-landing-page-git-main-shovonx47.vercel.app',
+    'https://miracle-school-website-fe.vercel.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
