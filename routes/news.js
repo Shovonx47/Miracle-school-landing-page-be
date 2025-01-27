@@ -2,10 +2,13 @@ const express = require('express');
 const router = express.Router();
 const News = require('../models/news');
 
-// Get all news
+// Get all news with optional category filter
 router.get('/', async (req, res) => {
     try {
-        const news = await News.find();
+        const { category } = req.query;
+        const query = category ? { category } : {};
+        
+        const news = await News.find(query);
         res.status(200).json({
             success: true,
             count: news.length,
