@@ -1,0 +1,117 @@
+[
+    {
+        "title": "75th Anniversary Celebration",
+        "slug": "75th-anniversary-celebration",
+        "date": "2024-12-15",
+        "time": "2:00 PM - 5:00 PM",
+        "location": "Main Auditorium, Notre Dame College",
+        "image": "/assets/images/banners/pexels-goumbik-296301.jpg",
+        "description": "Notre Dame College celebrates its 75th anniversary with great enthusiasm. Join us for this momentous occasion featuring special performances, alumni speeches, and a grand celebration of our institution's legacy. The event will showcase our journey through the years and our vision for the future.",
+        "highlights": [
+            "Special guest appearances from distinguished alumni",
+            "Historical exhibition of the college",
+            "Cultural performances by students",
+            "Award ceremony for notable achievements",
+            "Release of commemorative book"
+        ],
+        "schedule": [
+            { "time": "2:00 PM", "activity": "Registration and Welcome" },
+            { "time": "2:30 PM", "activity": "Opening Ceremony" },
+            { "time": "3:00 PM", "activity": "Main Event and Performances" },
+            { "time": "4:30 PM", "activity": "Closing Ceremony" },
+            { "time": "5:00 PM", "activity": "Refreshments and Networking" }
+        ]
+    },
+    {
+        "title": "Science Fair 2024",
+        "slug": "science-fair-2024",
+        "date": "2024-11-28",
+        "time": "9:00 AM - 4:00 PM",
+        "location": "Science Building, Notre Dame College",
+        "image": "/assets/images/banners/pexels-rdne-7606209.jpg",
+        "description": "Annual Science Fair showcasing innovative projects from our talented students. This year's theme focuses on sustainable technology and environmental conservation. Students will present their research projects and compete for various awards.",
+        "highlights": [
+            "Interactive science demonstrations",
+            "Student project exhibitions",
+            "Guest lectures by renowned scientists",
+            "Innovation competition",
+            "Robotics showcase"
+        ],
+        "schedule": [
+            { "time": "9:00 AM", "activity": "Exhibition Setup" },
+            { "time": "10:00 AM", "activity": "Opening and Project Presentations" },
+            { "time": "12:00 PM", "activity": "Lunch Break" },
+            { "time": "1:00 PM", "activity": "Guest Lectures" },
+            { "time": "3:00 PM", "activity": "Awards Ceremony" }
+        ]
+    },
+    {
+        "title": "Cultural Program",
+        "slug": "cultural-program",
+        "date": "2024-11-15",
+        "time": "3:00 PM - 8:00 PM",
+        "location": "College Amphitheater",
+        "image": "/assets/images/banners/pexels-su-casa-panama-56317556-9650298.jpg",
+        "description": "A vibrant celebration of arts and culture featuring performances by our talented students. The event will showcase traditional and modern cultural programs, including music, dance, and theatrical performances.",
+        "highlights": [
+            "Traditional dance performances",
+            "Modern music showcase",
+            "Theatrical productions",
+            "Art exhibition",
+            "Cultural fashion show"
+        ],
+        "schedule": [
+            { "time": "3:00 PM", "activity": "Opening Ceremony" },
+            { "time": "3:30 PM", "activity": "Traditional Performances" },
+            { "time": "5:00 PM", "activity": "Modern Performances" },
+            { "time": "6:30 PM", "activity": "Theater Show" },
+            { "time": "7:30 PM", "activity": "Grand Finale" }
+        ]
+    },
+    {
+        "title": "Sports Week 2024",
+        "slug": "sports-week-2024",
+        "date": "2024-12-20",
+        "time": "8:00 AM - 6:00 PM",
+        "location": "College Sports Complex",
+        "image": "/assets/images/banners/sports-week.jpg",
+        "description": "Annual sports week featuring various athletic competitions and team events. Students will compete in multiple sports disciplines, showcasing their athletic prowess and team spirit.",
+        "highlights": [
+            "Inter-class cricket tournament",
+            "Basketball championship",
+            "Athletics meet",
+            "Indoor sports competitions",
+            "Team building activities"
+        ],
+        "schedule": [
+            { "time": "8:00 AM", "activity": "Opening Ceremony" },
+            { "time": "9:00 AM", "activity": "Track Events" },
+            { "time": "11:00 AM", "activity": "Team Sports" },
+            { "time": "2:00 PM", "activity": "Indoor Games" },
+            { "time": "5:00 PM", "activity": "Prize Distribution" }
+        ]
+    },
+    {
+        "title": "Alumni Meet 2025",
+        "slug": "alumni-meet-2025",
+        "date": "2025-01-15",
+        "time": "4:00 PM - 9:00 PM",
+        "location": "College Grand Hall",
+        "image": "/assets/images/banners/alumni-meet.jpg",
+        "description": "Yearly alumni gathering to celebrate achievements and strengthen connections. Join us for an evening of networking, sharing experiences, and reconnecting with old friends and teachers.",
+        "highlights": [
+            "Alumni success stories",
+            "Networking session",
+            "Campus tour",
+            "Dinner and entertainment",
+            "Alumni awards ceremony"
+        ],
+        "schedule": [
+            { "time": "4:00 PM", "activity": "Registration" },
+            { "time": "4:30 PM", "activity": "Welcome Address" },
+            { "time": "5:00 PM", "activity": "Alumni Presentations" },
+            { "time": "7:00 PM", "activity": "Awards Ceremony" },
+            { "time": "8:00 PM", "activity": "Gala Dinner" }
+        ]
+    }
+]
