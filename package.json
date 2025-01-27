@@ -7,13 +7,16 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "data:import": "node utils/seeder.js import",
-    "data:destroy": "node utils/seeder.js destroy"
+    "data:destroy": "node utils/seeder.js destroy",
+    "watch:data": "node utils/watchSeeder.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "chokidar": "^3.5.3",
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",

@@ -29,7 +29,7 @@
     {
         "id": "75th-anniversary-celebration",
         "date": "December 15, 2024",
-        "title": "75th Anniversary Celebration",
+        "title": "75th Anniversary Grand Celebration",
         "description": "Notre Dame College celebrates its 75th anniversary with great enthusiasm.",
         "image": "/assets/images/banners/pexels-goumbik-296301.jpg",
         "category": "Event",
@@ -40,7 +40,7 @@
         "date": "December 20, 2024",
         "title": "Sports Week 2024",
         "description": "Annual sports week featuring various athletic competitions and team events.",
-        "image": "/assets/images/banners/sports-week.jpg",
+        "image": "/assets/images/banners/pexels-goumbik-296301.jpg",
         "category": "Event",
         "content": "<p>Join us for our annual Sports Week featuring various athletic competitions and team events. Students will compete in multiple sports disciplines, showcasing their athletic prowess and team spirit.</p><h2>Event Details</h2><p>Date: December 20, 2024<br/>Time: 8:00 AM - 6:00 PM<br/>Location: College Sports Complex</p><h2>Highlights</h2><ul><li>Inter-class cricket tournament</li><li>Basketball championship</li><li>Athletics meet</li><li>Indoor sports competitions</li><li>Team building activities</li></ul><h2>Schedule</h2><p>8:00 AM - Opening Ceremony<br/>9:00 AM - Track Events<br/>11:00 AM - Team Sports<br/>2:00 PM - Indoor Games<br/>5:00 PM - Prize Distribution</p>"
     },
@@ -49,7 +49,7 @@
         "date": "January 15, 2025",
         "title": "Alumni Meet 2025",
         "description": "Yearly alumni gathering to celebrate achievements and strengthen connections.",
-        "image": "/assets/images/banners/alumni-meet.jpg",
+        "image": "/assets/images/banners/pexels-goumbik-296301.jpg",
         "category": "Event",
         "content": "<p>Join us for our yearly alumni gathering to celebrate achievements and strengthen connections. An evening of networking, sharing experiences, and reconnecting with old friends and teachers.</p><h2>Event Details</h2><p>Date: January 15, 2025<br/>Time: 4:00 PM - 9:00 PM<br/>Location: College Grand Hall</p><h2>Highlights</h2><ul><li>Alumni success stories</li><li>Networking session</li><li>Campus tour</li><li>Dinner and entertainment</li><li>Alumni awards ceremony</li></ul><h2>Schedule</h2><p>4:00 PM - Registration<br/>4:30 PM - Welcome Address<br/>5:00 PM - Alumni Presentations<br/>7:00 PM - Awards Ceremony<br/>8:00 PM - Gala Dinner</p>"
     }
