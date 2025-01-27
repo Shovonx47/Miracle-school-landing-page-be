@@ -1,7 +1,7 @@
 const contactInformation = {
     generalInquiries: {
         email: 'info@schoolname.edu',
-        phone: '(555) 123-4567',
+        phone: '(555) 123-4534543',
         address: '123 Education Street, City, State 12345'
     },
     departmentContacts: [
