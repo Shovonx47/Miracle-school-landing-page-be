@@ -29,6 +29,12 @@ const newsSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true
+    },
+    pdfUrl: {
+        type: String,
+        required: function() {
+            return this.category === 'Notice';
+        }
     }
 }, { timestamps: true });
 
