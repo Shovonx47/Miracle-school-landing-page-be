@@ -4,6 +4,7 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const aboutUsRoutes = require('./routes/aboutUsRoutes');
 const historyRoutes = require('./routes/historyRoutes');
+const administrationRoute = require('./routes/administrationRoute');
 
 const app = express();
 
@@ -46,9 +47,8 @@ app.use('/api/faculty', require('./routes/facultyRoutes'));
 app.use('/api/location', require('./routes/locationRoutes'));
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/news', require('./routes/news'));
-
-// Integrated routes for About Us and History
 app.use('/api/about-us', aboutUsRoutes);
+app.use('/api/about-us/administration', administrationRoute);
 app.use('/api/history', historyRoutes);
 
 // Error handling middleware
