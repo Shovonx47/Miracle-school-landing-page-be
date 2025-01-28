@@ -5,7 +5,7 @@ const commonData = {
   heroTitle: 'Our Legacy',
   heroSubtitle: 'Seven decades of shaping minds and building futures at Notre Dame College Dhaka',
   legacyTitle: 'A Legacy of Excellence',
-  legacyDescription: 'Notre Dame College, established in 1949, stands as a beacon of educational excellence in Bangladesh. Founded by the Congregation of Holy Cross, our institution has cultivated a rich tradition of academic achievement and moral formation that spans over seven decades. Through the years, we have maintained our commitment to holistic education, combining rigorous academic standards with character development and community service. Our legacy is reflected in the countless alumni who have gone on to make significant contributions to society.',
+  legacyDescription: 'Notre Dame College, established in 1949, stands as a firm beacon of educational excellence in Bangladesh. Founded by the Congregation of Holy Cross, our institution has cultivated a rich tradition of academic achievement and moral formation that spans over seven decades. Through the years, we have maintained our commitment to holistic education, combining rigorous academic standards with character development and community service. Our legacy is reflected in the countless alumni who have gone on to make significant contributions to society.',
   stats: [
     { value: '1949', label: 'Founded' },
     { value: '10000+', label: 'Alumni' },
@@ -45,4 +45,4 @@ const seedTimelineEvents = async () => {
   }
 };
 
-module.exports = seedTimelineEvents;
+module.exports = timelineEvents;
