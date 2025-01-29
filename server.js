@@ -33,6 +33,9 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Serve static files
+app.use('/assets', express.static('assets'));
+
 // Connect to MongoDB before handling routes
 const withDB = async (req, res, next) => {
   try {
