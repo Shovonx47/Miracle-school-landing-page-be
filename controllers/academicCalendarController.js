@@ -1,9 +1,7 @@
 const AcademicCalendar = require('../models/academicCalendar');
-const ErrorHandler = require('../utils/errorHandler');
-const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
 // Get all academic calendar data
-exports.getAcademicCalendar = catchAsyncErrors(async (req, res, next) => {
+exports.getAcademicCalendar = async (req, res) => {
     try {
         const academicCalendars = await AcademicCalendar.find();
 
@@ -21,12 +19,17 @@ exports.getAcademicCalendar = catchAsyncErrors(async (req, res, next) => {
             data: academicCalendars
         });
     } catch (error) {
-        return next(new ErrorHandler('Error fetching academic calendar data', 500));
+        console.error('Error fetching academic calendar:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error fetching academic calendar data',
+            error: error.message
+        });
     }
-});
+};
 
 // Create new academic calendar entry
-exports.createAcademicCalendar = catchAsyncErrors(async (req, res, next) => {
+exports.createAcademicCalendar = async (req, res) => {
     try {
         const academicCalendar = await AcademicCalendar.create(req.body);
 
@@ -35,17 +38,25 @@ exports.createAcademicCalendar = catchAsyncErrors(async (req, res, next) => {
             data: academicCalendar
         });
     } catch (error) {
-        return next(new ErrorHandler('Error creating academic calendar entry', 500));
+        console.error('Error creating academic calendar:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error creating academic calendar entry',
+            error: error.message
+        });
     }
-});
+};
 
 // Update academic calendar entry
-exports.updateAcademicCalendar = catchAsyncErrors(async (req, res, next) => {
+exports.updateAcademicCalendar = async (req, res) => {
     try {
         let academicCalendar = await AcademicCalendar.findById(req.params.id);
 
         if (!academicCalendar) {
-            return next(new ErrorHandler('Academic calendar entry not found', 404));
+            return res.status(404).json({
+                success: false,
+                message: 'Academic calendar entry not found'
+            });
         }
 
         academicCalendar = await AcademicCalendar.findByIdAndUpdate(req.params.id, req.body, {
@@ -58,17 +69,25 @@ exports.updateAcademicCalendar = catchAsyncErrors(async (req, res, next) => {
             data: academicCalendar
         });
     } catch (error) {
-        return next(new ErrorHandler('Error updating academic calendar entry', 500));
+        console.error('Error updating academic calendar:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error updating academic calendar entry',
+            error: error.message
+        });
     }
-});
+};
 
 // Delete academic calendar entry
-exports.deleteAcademicCalendar = catchAsyncErrors(async (req, res, next) => {
+exports.deleteAcademicCalendar = async (req, res) => {
     try {
         const academicCalendar = await AcademicCalendar.findById(req.params.id);
 
         if (!academicCalendar) {
-            return next(new ErrorHandler('Academic calendar entry not found', 404));
+            return res.status(404).json({
+                success: false,
+                message: 'Academic calendar entry not found'
+            });
         }
 
         await academicCalendar.deleteOne();
@@ -78,6 +97,11 @@ exports.deleteAcademicCalendar = catchAsyncErrors(async (req, res, next) => {
             message: 'Academic calendar entry deleted successfully'
         });
     } catch (error) {
-        return next(new ErrorHandler('Error deleting academic calendar entry', 500));
+        console.error('Error deleting academic calendar:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Error deleting academic calendar entry',
+            error: error.message
+        });
     }
-});
+};
