@@ -9,6 +9,7 @@ const AlbumImage = require('../models/albumImageModel');
 const News = require('../models/news');
 const Contact = require('../models/contactModel');
 const TimelineEvent = require('../models/timelineEventModel');
+const Principal = require('../models/Principal');
 
 // Model mapping
 const modelMap = {
@@ -23,7 +24,8 @@ const modelMap = {
     'albumImagesSeeder.js': { model: AlbumImage, type: 'js' },
     'contactSeeder.js': { model: Contact, type: 'js' },
     'governingBodySeeder.js': { model: GoverningBody, type: 'js' },
-    'timelineEventsSeeder.js': { model: TimelineEvent, type: 'js' }
+    'timelineEventsSeeder.js': { model: TimelineEvent, type: 'js' },
+    'principalSeeder.js': { model: Principal, type: 'js' }
 };
 
 // Function to get all seeder files

@@ -10,6 +10,7 @@ const facultyRoutes = require('./routes/facultyRoutes');
 const locationRoutes = require('./routes/locationRoutes');
 const contact = require('./routes/contact');
 const news = require('./routes/news');
+const principalRoutes = require('./routes/principalRoutes');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/api/news', news);
 app.use('/api/about-us', aboutUsRoutes);
 app.use('/api/about-us/administration', administrationRoute);
 app.use('/api/history', historyRoutes);
+app.use('/api', principalRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
