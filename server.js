@@ -12,7 +12,7 @@ const contact = require('./routes/contact');
 const news = require('./routes/news');
 const principalRoutes = require('./routes/principalRoutes');
 const collegeStatsRoutes = require('./routes/collegeStatsRoutes');
-const academicCalendarRoutes = require('./routes/academicCalendarRoutes');
+const academicCalendarRoutes = require('./routes/academicCalendar');
 
 const app = express();
 
