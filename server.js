@@ -12,6 +12,7 @@ const contact = require('./routes/contact');
 const news = require('./routes/news');
 const principalRoutes = require('./routes/principalRoutes');
 const collegeStatsRoutes = require('./routes/collegeStatsRoutes');
+const academicCalendarRoutes = require('./routes/academicCalendarRoutes');
 
 const app = express();
 
@@ -58,6 +59,7 @@ app.use('/api/about-us/administration', administrationRoute);
 app.use('/api/history', historyRoutes);
 app.use('/api', principalRoutes);
 app.use('/api', collegeStatsRoutes);
+app.use('/api/v1', academicCalendarRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

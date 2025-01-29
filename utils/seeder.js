@@ -11,12 +11,14 @@ const Contact = require('../models/contactModel');
 const TimelineEvent = require('../models/timelineEventModel');
 const Principal = require('../models/Principal');
 const CollegeStats = require('../models/CollegeStats');
+const AcademicCalendar = require('../models/academicCalendar');
 
 // Model mapping
 const modelMap = {
     'news.json': { model: News, type: 'json' },
     'notices.json': { model: News, type: 'json' },
     'events.json': { model: News, type: 'json' },
+    'academicCalendar.json': { model: AcademicCalendar, type: 'json' },
     'administrationSeeder.js': { 
         models: [GoverningBody, AlbumImage],
         collections: ['governingBody', 'albumImages'],
