@@ -12,6 +12,7 @@ const TimelineEvent = require('../models/timelineEventModel');
 const Principal = require('../models/Principal');
 const CollegeStats = require('../models/CollegeStats');
 const AcademicCalendar = require('../models/academicCalendar');
+const Curriculum = require('../models/curriculum');
 
 // Model mapping
 const modelMap = {
@@ -19,6 +20,7 @@ const modelMap = {
     'notices.json': { model: News, type: 'json' },
     'events.json': { model: News, type: 'json' },
     'academicCalendar.json': { model: AcademicCalendar, type: 'json' },
+    'curriculum.json': { model: Curriculum, type: 'json' },
     'administrationSeeder.js': { 
         models: [GoverningBody, AlbumImage],
         collections: ['governingBody', 'albumImages'],

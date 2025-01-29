@@ -13,6 +13,7 @@ const news = require('./routes/news');
 const principalRoutes = require('./routes/principalRoutes');
 const collegeStatsRoutes = require('./routes/collegeStatsRoutes');
 const academicCalendarRoutes = require('./routes/academicCalendar');
+const curriculumRoutes = require('./routes/curriculum');
 
 const app = express();
 
@@ -22,7 +23,8 @@ app.use(cors({
     'http://localhost:3000',
     'https://miracle-school-landing-page.vercel.app',
     'https://miracle-school-landing-page-git-main-shovonx47.vercel.app',
-    'https://miracle-school-website-fe.vercel.app'
+    'https://miracle-school-website-fe.vercel.app',
+    'https://miracle-school-landing-page-be.vercel.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -60,6 +62,7 @@ app.use('/api/history', historyRoutes);
 app.use('/api', principalRoutes);
 app.use('/api', collegeStatsRoutes);
 app.use('/api/v1', academicCalendarRoutes);
+app.use('/api/v1', curriculumRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
