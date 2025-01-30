@@ -1,6 +1,6 @@
 const FAQ = require('../models/faqModel');
 const ErrorHandler = require('../utils/errorHandler');
-const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
+const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
 // Get all FAQs => /api/v1/faqs
 exports.getFaqs = catchAsyncErrors(async (req, res, next) => {

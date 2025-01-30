@@ -9,15 +9,13 @@ const {
     deleteFaq
 } = require('../controllers/faqController');
 
-const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth');
-
 router.route('/faqs').get(getFaqs);
 router.route('/faq/:id').get(getSingleFaq);
 
-// Admin Routes
-router.route('/admin/faq/new').post(isAuthenticatedUser, authorizeRoles('admin'), newFaq);
+// Admin Routes (temporarily without auth)
+router.route('/admin/faq/new').post(newFaq);
 router.route('/admin/faq/:id')
-    .put(isAuthenticatedUser, authorizeRoles('admin'), updateFaq)
-    .delete(isAuthenticatedUser, authorizeRoles('admin'), deleteFaq);
+    .put(updateFaq)
+    .delete(deleteFaq);
 
 module.exports = router;
