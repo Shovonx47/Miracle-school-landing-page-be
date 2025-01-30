@@ -14,7 +14,6 @@ const principalRoutes = require('./routes/principalRoutes');
 const collegeStatsRoutes = require('./routes/collegeStatsRoutes');
 const academicCalendarRoutes = require('./routes/academicCalendar');
 const curriculumRoutes = require('./routes/curriculum');
-const faq = require('./routes/faq');
 
 const app = express();
 
@@ -37,26 +36,10 @@ app.use(express.urlencoded({ extended: false }));
 // Serve static files
 app.use('/assets', express.static('assets'));
 
-// Connect to MongoDB
-let cachedDb = null;
-
-const connectToDatabase = async () => {
-  if (cachedDb) {
-    return cachedDb;
-  }
-  try {
-    cachedDb = await connectDB();
-    return cachedDb;
-  } catch (error) {
-    console.error('Database connection error:', error);
-    throw error;
-  }
-};
-
-// Middleware to ensure DB connection
+// Connect to MongoDB before handling routes
 const withDB = async (req, res, next) => {
   try {
-    await connectToDatabase();
+    await connectDB();
     next();
   } catch (error) {
     console.error('Database connection error:', error);
@@ -83,24 +66,19 @@ app.use('/api', principalRoutes);
 app.use('/api', collegeStatsRoutes);
 app.use('/api/v1', academicCalendarRoutes);
 app.use('/api/v1', curriculumRoutes);
-app.use('/api/v1', faq);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({
     success: false,
-    message: 'Internal Server Error',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    message: 'Internal Server Error'
   });
 });
 
-// For local development
-if (process.env.NODE_ENV !== 'production') {
-  const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-}
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 module.exports = app;
