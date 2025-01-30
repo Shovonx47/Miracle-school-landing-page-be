@@ -14,6 +14,7 @@ const principalRoutes = require('./routes/principalRoutes');
 const collegeStatsRoutes = require('./routes/collegeStatsRoutes');
 const academicCalendarRoutes = require('./routes/academicCalendar');
 const curriculumRoutes = require('./routes/curriculum');
+const faq = require('./routes/faq');
 
 const app = express();
 
@@ -66,6 +67,7 @@ app.use('/api', principalRoutes);
 app.use('/api', collegeStatsRoutes);
 app.use('/api/v1', academicCalendarRoutes);
 app.use('/api/v1', curriculumRoutes);
+app.use('/api/v1', faq);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -82,3 +84,5 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
+
+// Just for commit
