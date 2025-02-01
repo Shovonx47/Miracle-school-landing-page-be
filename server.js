@@ -70,20 +70,25 @@ app.use('/api/v1', academicCalendarRoutes);
 app.use('/api/v1', curriculumRoutes);
 app.use('/api/v1', faq);
 app.use('/api/v1', scholarshipRoutes);
+
+// Basic route for testing
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({
-    success: false,
-    message: 'Internal Server Error'
-  });
+  res.status(500).json({ message: 'Something went wrong!' });
 });
 
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
+// For Vercel serverless deployment
 module.exports = app;
 
 // Just for commit
