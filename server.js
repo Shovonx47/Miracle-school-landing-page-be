@@ -69,7 +69,7 @@ app.use('/api', collegeStatsRoutes);
 app.use('/api/v1', academicCalendarRoutes);
 app.use('/api/v1', curriculumRoutes);
 app.use('/api/v1', faq);
-app.use('/api/v1', scholarshipRoutes);
+app.use('/api', scholarshipRoutes);
 
 // Basic route for testing
 app.get('/', (req, res) => {
