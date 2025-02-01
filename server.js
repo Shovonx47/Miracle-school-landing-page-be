@@ -15,6 +15,7 @@ const collegeStatsRoutes = require('./routes/collegeStatsRoutes');
 const academicCalendarRoutes = require('./routes/academicCalendar');
 const curriculumRoutes = require('./routes/curriculum');
 const faq = require('./routes/faq');
+const scholarshipRoutes = require('./routes/scholarshipRoutes');
 
 const app = express();
 
@@ -68,7 +69,7 @@ app.use('/api', collegeStatsRoutes);
 app.use('/api/v1', academicCalendarRoutes);
 app.use('/api/v1', curriculumRoutes);
 app.use('/api/v1', faq);
-
+app.use('/api/v1', scholarshipRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

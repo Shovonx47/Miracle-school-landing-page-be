@@ -14,6 +14,9 @@ const CollegeStats = require('../models/CollegeStats');
 const AcademicCalendar = require('../models/academicCalendar');
 const Curriculum = require('../models/curriculum');
 const FAQ = require('../models/faqModel');
+const ScholarshipPage = require('../models/Scholarship');
+const scholarshipData = require('../data/scholarshipData');
+const connectDB = require('../config/db');
 
 // Model mapping
 const modelMap = {
@@ -133,4 +136,28 @@ if (command === 'import') {
 } else {
     console.error('Please use: node utils/seeder.js import [filename|all]');
     process.exit(1);
+}
+
+const seedScholarshipData = async () => {
+  try {
+    await connectDB();
+    
+    // Clear existing data
+    await ScholarshipPage.deleteMany();
+    
+    // Insert new data
+    await ScholarshipPage.create(scholarshipData);
+    
+    console.log('Scholarship data seeded successfully');
+    process.exit();
+  } catch (error) {
+    console.error('Error seeding scholarship data:', error);
+    process.exit(1);
+  }
+};
+
+module.exports = seedScholarshipData;
+
+if (require.main === module) {
+  seedScholarshipData();
 }
