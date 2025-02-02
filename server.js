@@ -30,7 +30,8 @@ app.use(cors({
     'https://miracle-school-landing-page.vercel.app',
     'https://miracle-school-landing-page-git-main-shovonx47.vercel.app',
     'https://miracle-school-website-fe.vercel.app',
-    'https://miracle-school-landing-page-be.vercel.app'
+    'https://miracle-school-landing-page-be.vercel.app',
+    // Add your frontend domain here if it's different
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
