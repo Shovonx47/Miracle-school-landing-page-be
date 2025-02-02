@@ -17,6 +17,10 @@ const FAQ = require('../models/faqModel');
 const ScholarshipPage = require('../models/Scholarship');
 const scholarshipData = require('../data/scholarshipData');
 const connectDB = require('../config/db');
+const EventCalendar = require('../models/EventCalendar');
+const eventCalendarData = require('../data/eventCalendarData');
+const CampusFacility = require('../models/CampusFacility');
+const campusFacilityData = require('../data/campusFacilityData');
 
 // Model mapping
 const modelMap = {
@@ -36,14 +40,16 @@ const modelMap = {
     'timelineEventsSeeder.js': { model: TimelineEvent, type: 'js' },
     'principalSeeder.js': { model: Principal, type: 'js' },
     'collegeStatsSeeder.js': { model: CollegeStats, type: 'js' },
-    'faqs.json': { model: FAQ, type: 'json' }
+    'faqs.json': { model: FAQ, type: 'json' },
+    'eventCalendarData.js': { model: EventCalendar, type: 'js' },
+    'campusFacilityData.js': { model: CampusFacility, type: 'js' }
 };
 
 // Function to get all seeder files
 const getSeederFiles = async () => {
     const dataDir = path.join(__dirname, '../data');
     const files = await fs.readdir(dataDir);
-    return files.filter(file => file.endsWith('.json') || file.endsWith('Seeder.js'));
+    return files.filter(file => file.endsWith('.json') || file.endsWith('Seeder.js') || file === 'eventCalendarData.js');
 };
 
 // Function to seed data
@@ -58,6 +64,14 @@ const seedData = async (fileName) => {
         const seederConfig = modelMap[fileName];
         if (!seederConfig) {
             console.log(`No configuration found for ${fileName}, skipping...`);
+            return true;
+        }
+
+        if (fileName === 'eventCalendarData.js') {
+            // Handle event calendar data specifically
+            await EventCalendar.deleteMany();
+            await EventCalendar.create(eventCalendarData);
+            console.log('Event calendar data seeded successfully');
             return true;
         }
 
@@ -101,6 +115,11 @@ const seedAllData = async () => {
             await seedData(file);
         }
         
+        // Specifically seed event calendar data
+        await EventCalendar.deleteMany();
+        await EventCalendar.create(eventCalendarData);
+        console.log('Event calendar data seeded successfully');
+        
         // Close connection after all operations
         if (mongoose.connection.readyState === 1) {
             await mongoose.connection.close();
@@ -133,6 +152,23 @@ if (command === 'import') {
             process.exit(success ? 0 : 1);
         });
     }
+} else if (command === 'destroy') {
+    // Add event calendar to destroy operation
+    mongoose.connect(process.env.MONGODB_URI)
+        .then(() => {
+            return Promise.all([
+                // ... other model deletions ...
+                EventCalendar.deleteMany()
+            ]);
+        })
+        .then(() => {
+            console.log('All data destroyed successfully'.red.inverse);
+            process.exit();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            process.exit(1);
+        });
 } else {
     console.error('Please use: node utils/seeder.js import [filename|all]');
     process.exit(1);
