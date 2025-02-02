@@ -23,7 +23,12 @@ transporter.verify(function(error, success) {
 
 const sendFeedbackEmail = async (feedback) => {
   try {
-    // Create a more detailed email content
+    // Check if any data was provided
+    const hasName = feedback.name && feedback.name !== 'Anonymous';
+    const hasEmail = feedback.email && feedback.email !== 'Not provided';
+    const hasPhone = feedback.phone && feedback.phone !== 'Not provided';
+    const hasMessage = feedback.message && feedback.message !== 'No message provided';
+
     const emailContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #6B21A8; border-bottom: 2px solid #6B21A8; padding-bottom: 10px;">নতুন ফিডব্যাক প্রাপ্ত হয়েছে</h2>
@@ -34,35 +39,18 @@ const sendFeedbackEmail = async (feedback) => {
           <div style="margin-bottom: 15px;">
             <strong style="color: #4B5563;">প্রেরক তথ্য:</strong>
             <ul style="list-style: none; padding-left: 0;">
-              <li style="margin: 5px 0;">
-                <strong>নাম:</strong> ${feedback.name !== 'Anonymous' ? feedback.name : 'নাম প্রদান করা হয়নি'}
-              </li>
-              <li style="margin: 5px 0;">
-                <strong>ইমেইল:</strong> ${feedback.email !== 'Not provided' ? feedback.email : 'ইমেইল প্রদান করা হয়নি'}
-              </li>
-              <li style="margin: 5px 0;">
-                <strong>ফোন:</strong> ${feedback.phone !== 'Not provided' ? feedback.phone : 'ফোন নম্বর প্রদান করা হয়নি'}
-              </li>
+              ${hasName ? `<li style="margin: 5px 0;"><strong>নাম:</strong> ${feedback.name}</li>` : ''}
+              ${hasEmail ? `<li style="margin: 5px 0;"><strong>ইমেইল:</strong> ${feedback.email}</li>` : ''}
+              ${hasPhone ? `<li style="margin: 5px 0;"><strong>ফোন:</strong> ${feedback.phone}</li>` : ''}
             </ul>
           </div>
 
-          <div style="margin-bottom: 15px;">
-            <strong style="color: #4B5563;">ফিডব্যাক বার্তা:</strong>
-            <p style="background-color: white; padding: 15px; border-radius: 4px; margin-top: 5px;">
-              ${feedback.message !== 'No message provided' ? feedback.message : 'কোন বার্তা প্রদান করা হয়নি'}
-            </p>
-          </div>
-
-          ${feedback.attachments && feedback.attachments.length ? `
+          ${hasMessage ? `
             <div style="margin-bottom: 15px;">
-              <strong style="color: #4B5563;">সংযুক্তি:</strong>
-              <ul style="list-style: none; padding-left: 0;">
-                ${feedback.attachments.map(url => `
-                  <li style="margin: 5px 0;">
-                    <a href="${url}" style="color: #6B21A8;">সংযুক্তি দেখুন</a>
-                  </li>
-                `).join('')}
-              </ul>
+              <strong style="color: #4B5563;">ফিডব্যাক বার্তা:</strong>
+              <p style="background-color: white; padding: 15px; border-radius: 4px; margin-top: 5px;">
+                ${feedback.message}
+              </p>
             </div>
           ` : ''}
 
