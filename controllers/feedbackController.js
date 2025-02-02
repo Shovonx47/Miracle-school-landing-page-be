@@ -1,8 +1,7 @@
 const Feedback = require('../models/Feedback');
 const { sendFeedbackEmail } = require('../utils/emailService');
-const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
 
-exports.submitFeedback = catchAsyncErrors(async (req, res) => {
+exports.submitFeedback = async (req, res) => {
   try {
     // Create feedback in database
     const feedback = await Feedback.create(req.body);
@@ -23,13 +22,21 @@ exports.submitFeedback = catchAsyncErrors(async (req, res) => {
       error: error.message
     });
   }
-});
+};
 
-exports.getFeedbacks = catchAsyncErrors(async (req, res) => {
-  const feedbacks = await Feedback.find().sort({ createdAt: -1 });
-  
-  res.status(200).json({
-    success: true,
-    feedbacks
-  });
-}); 
+exports.getFeedbacks = async (req, res) => {
+  try {
+    const feedbacks = await Feedback.find().sort({ createdAt: -1 });
+    
+    res.status(200).json({
+      success: true,
+      feedbacks
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error fetching feedbacks',
+      error: error.message
+    });
+  }
+}; 
