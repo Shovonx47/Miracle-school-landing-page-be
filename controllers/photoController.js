@@ -1,6 +1,6 @@
 const Photo = require('../models/photo');
 const ErrorHandler = require('../utils/errorHandler');
-const catchAsyncErrors = require('../middlewares/catchAsyncErrors');
+const catchAsyncErrors = require('../middleware/catchAsyncErrors');
 
 // Get all photos with pagination => /api/photos
 exports.getPhotos = catchAsyncErrors(async (req, res, next) => {
