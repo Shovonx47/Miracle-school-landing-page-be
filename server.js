@@ -19,6 +19,7 @@ const scholarshipRoutes = require('./routes/scholarshipRoutes');
 const eventCalendarRoutes = require('./routes/eventCalendarRoutes');
 const campusFacilityRoutes = require('./routes/campusFacilityRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
+const photoRoutes = require('./routes/photo');
 
 const app = express();
 
@@ -76,6 +77,7 @@ app.use('/api', scholarshipRoutes);
 app.use('/api', eventCalendarRoutes);
 app.use('/api', campusFacilityRoutes);
 app.use('/api', feedbackRoutes);
+app.use('/api/v1', photoRoutes);
 
 // Basic route for testing
 app.get('/', (req, res) => {
