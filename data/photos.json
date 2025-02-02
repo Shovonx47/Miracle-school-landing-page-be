@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Business Analytics",
+    "imageUrl": "/assets/images/banners/pexels-goumbik-296301.jpg",
+    "altText": "Business Analytics Dashboard",
+    "category": "Business"
+  },
+  {
+    "title": "Team Meeting",
+    "imageUrl": "/assets/images/banners/pexels-rdne-7606209.jpg",
+    "altText": "Team Discussion",
+    "category": "Business"
+  },
+  {
+    "title": "Modern Office",
+    "imageUrl": "/assets/images/banners/pexels-su-casa-panama-56317556-9650298.jpg",
+    "altText": "Modern Office Space",
+    "category": "Workspace"
+  },
+  {
+    "title": "Healthcare Technology",
+    "imageUrl": "/assets/images/mv/national-cancer-institute-N_aihp118p8-unsplash.jpg",
+    "altText": "Medical Equipment",
+    "category": "Healthcare"
+  },
+  {
+    "title": "Data Analytics",
+    "imageUrl": "/assets/images/mv/pexels-goumbik-296301.jpg",
+    "altText": "Data Visualization",
+    "category": "Technology"
+  }
+] 

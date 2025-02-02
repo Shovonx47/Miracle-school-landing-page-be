@@ -21,6 +21,8 @@ const EventCalendar = require('../models/EventCalendar');
 const eventCalendarData = require('../data/eventCalendarData');
 const CampusFacility = require('../models/CampusFacility');
 const campusFacilityData = require('../data/campusFacilityData');
+const Photo = require('../models/photo');
+const photos = require('../data/photos.json');
 
 // Model mapping
 const modelMap = {
@@ -42,7 +44,8 @@ const modelMap = {
     'collegeStatsSeeder.js': { model: CollegeStats, type: 'js' },
     'faqs.json': { model: FAQ, type: 'json' },
     'eventCalendarData.js': { model: EventCalendar, type: 'js' },
-    'campusFacilityData.js': { model: CampusFacility, type: 'js' }
+    'campusFacilityData.js': { model: CampusFacility, type: 'js' },
+    'photos.json': { model: Photo, type: 'json' }
 };
 
 // Function to get all seeder files
@@ -205,8 +208,28 @@ const seedScholarshipData = async () => {
   }
 };
 
-module.exports = seedScholarshipData;
+const seedPhotos = async () => {
+  try {
+    await connectDB();
+    
+    // Delete existing photos
+    await Photo.deleteMany();
+    console.log('Photos deleted');
+
+    // Insert new photos
+    await Photo.insertMany(photos);
+    console.log('All photos added');
+
+    process.exit();
+  } catch (error) {
+    console.log(error.message);
+    process.exit();
+  }
+};
+
+module.exports = { seedScholarshipData, seedPhotos };
 
 if (require.main === module) {
   seedScholarshipData();
+  seedPhotos();
 }
