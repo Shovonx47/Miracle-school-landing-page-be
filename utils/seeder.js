@@ -75,6 +75,14 @@ const seedData = async (fileName) => {
             return true;
         }
 
+        if (fileName === 'campusFacilityData.js') {
+            // Handle campus facility data specifically
+            await CampusFacility.deleteMany();
+            await CampusFacility.create(campusFacilityData);
+            console.log('Campus facility data seeded successfully');
+            return true;
+        }
+
         if (seederConfig.type === 'json') {
             // Handle JSON files
             const data = require(`../data/${fileName}`);
@@ -120,6 +128,11 @@ const seedAllData = async () => {
         await EventCalendar.create(eventCalendarData);
         console.log('Event calendar data seeded successfully');
         
+        // Specifically seed campus facility data
+        await CampusFacility.deleteMany();
+        await CampusFacility.create(campusFacilityData);
+        console.log('Campus facility data seeded successfully');
+        
         // Close connection after all operations
         if (mongoose.connection.readyState === 1) {
             await mongoose.connection.close();
@@ -153,12 +166,12 @@ if (command === 'import') {
         });
     }
 } else if (command === 'destroy') {
-    // Add event calendar to destroy operation
     mongoose.connect(process.env.MONGODB_URI)
         .then(() => {
             return Promise.all([
                 // ... other model deletions ...
-                EventCalendar.deleteMany()
+                EventCalendar.deleteMany(),
+                CampusFacility.deleteMany()
             ]);
         })
         .then(() => {
