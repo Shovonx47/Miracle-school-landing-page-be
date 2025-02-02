@@ -3,25 +3,23 @@ const mongoose = require('mongoose');
 const feedbackSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please enter your name']
+    default: 'Anonymous'
   },
   email: {
     type: String,
-    required: [true, 'Please enter your email'],
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email']
+    default: 'Not provided'
   },
   phone: {
     type: String,
-    required: [true, 'Please enter your phone number']
+    default: 'Not provided'
   },
   type: {
     type: String,
-    required: [true, 'Please specify feedback type'],
-    enum: ['মতামত', 'জিজ্ঞাসা']
+    default: 'General'
   },
   message: {
     type: String,
-    required: [true, 'Please enter your message']
+    default: 'No message provided'
   },
   attachments: [{
     type: String // URLs to uploaded files

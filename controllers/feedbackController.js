@@ -3,30 +3,21 @@ const { sendFeedbackEmail } = require('../utils/emailService');
 
 exports.submitFeedback = async (req, res) => {
   try {
-    console.log('Received feedback:', req.body); // Debug log
+    console.log('Received feedback:', req.body);
 
-    // Validate required fields
-    const { name, email, phone, message } = req.body;
-    if (!name || !email || !phone || !message) {
-      return res.status(400).json({
-        success: false,
-        message: 'Please provide all required fields'
-      });
-    }
-
-    // Create feedback in database
+    // Create feedback with whatever data is provided
     const feedback = await Feedback.create({
-      name,
-      email,
-      phone,
-      message,
+      name: req.body.name || 'Anonymous',
+      email: req.body.email || 'Not provided',
+      phone: req.body.phone || 'Not provided',
+      message: req.body.message || 'No message provided',
       type: req.body.type || 'General',
       attachments: req.body.attachments || []
     });
 
     // Send email notification
     const emailSent = await sendFeedbackEmail(feedback);
-    console.log('Email sending status:', emailSent); // Debug log
+    console.log('Email sending status:', emailSent);
 
     res.status(201).json({
       success: true,
@@ -35,7 +26,7 @@ exports.submitFeedback = async (req, res) => {
       feedback
     });
   } catch (error) {
-    console.error('Feedback submission error:', error); // Debug log
+    console.error('Feedback submission error:', error);
     res.status(500).json({
       success: false,
       message: 'Error submitting feedback',
